@@ -12,7 +12,6 @@ body {
 }
 
 header {
-    background-color: blue;
     text-align: center;
     padding: 1rem;
     font-size: 1.2rem ;
@@ -22,7 +21,7 @@ main {
     width: 95%;
     max-width: 1200px;
     margin: 1rem auto;
-    background-color: skyblue;
+    background-color: white;
 }
 
 h1 {
@@ -31,7 +30,6 @@ h1 {
 }
 
 form {
-    background-color: brown;
     padding: 1.5rem;
 }
 
@@ -47,8 +45,7 @@ input {
 button {
     width: 100%;
     padding: 0.8rem;
-    background-color: #d15c25;
-    color: white;
+    color: black;
     border: none;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -57,5 +54,36 @@ button {
 }
 
 button:hover {
-    background-color: #a34b30;
+    background-color: skyblue;
+}
+
+.contenedor {
+    display: grid;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+#empleados {
+    border-radius: 12px;
+    padding: 1rem;
+    min-height: 400px;
+    background-color: skyblue;
+}
+
+#contenedor-lista-empleados {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    border-radius: 12px;
+}
+
+#lista-empleados{
+    list-style-type: none;
+}
+
+#lista-empleados li{
+    margin: 1rem;
+    padding: 0.2rem;
 }
