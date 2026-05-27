@@ -42,7 +42,7 @@ input {
     font-size: 0.9rem;
 }
 
-button {
+#boton-registrarse {
     width: 100%;
     padding: 0.8rem;
     color: black;
@@ -58,32 +58,20 @@ button:hover {
 }
 
 .contenedor {
-    display: grid;
+    display: none;
     text-align: center;
     margin-top: 1rem;
     margin-bottom: 1rem;
     color: black;
 }
 
-#empleados {
+#contenedor-tabla-empleados {
     border-radius: 12px;
     padding: 1rem;
     min-height: 400px;
     background-color: skyblue;
 }
 
-#contenedor-lista-empleados {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    border-radius: 12px;
-}
-
-#lista-empleados{
-    list-style-type: none;
-}
-
-#lista-empleados li{
-    margin: 1rem;
-    padding: 0.2rem;
+#tabla-empleados {
+    min-width: 90%;
 }

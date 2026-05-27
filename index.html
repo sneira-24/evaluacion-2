@@ -15,19 +15,37 @@
         <h1>Registro</h1>
         <form action ="">
             <label for="nombre">Nombre</label><br>
-            <input type="text" id="nombre" placeholder="Ingrese su nombre..."><br>
+            <input type="text" id="nombre" placeholder="Ingrese su nombre..." required><br>
             <label for="apellido">Apellido</label><br>
-            <input type="text" id="apellido" placeholder="Ingrese su apellido..."><br>
+            <input type="text" id="apellido" placeholder="Ingrese su apellido..." required><br>
             <label for="cargo">Cargo</label><br>
-            <input type="text" id="cargo" placeholder="Ingrese su cargo..."><br>
+            <input type="text" id="cargo" placeholder="Ingrese su cargo..." required><br>
             <label for="email">Email</label><br>
-            <input type="email" id="email" placeholder="Ingrese su email..."><br>
+            <input type="email" id="email" placeholder="Ingrese su email..." required><br>
             <button id="boton-registrarse">Registrarse</button>
         </form>
+        <div class="contenedor">
+            <h2>Lista empleados</h2>
+            <div id="contenedor-tabla-empleados">
+                    <table id="tabla-empleados">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Cargo</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla">
+                        </tbody>
+                    </table>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>Cristian aweonao</p>
+
     </footer>
     <script src="script.js"></script>
 </body>
