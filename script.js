@@ -1,18 +1,28 @@
 let btn_registro = document.getElementById("boton-registrarse");
 let usuarios = [];
-
+let contenedor_tabla = document.getElementById("contenedor-tabla-empleados")
 
 function usuarioALista(usuarios){
-    const lista_usuarios = document.getElementById("lista-empleados")
-    let contador = 0
-    let test = ""
-    for (usuario in usuarios){
-        test += "<li>"+Object.values(usuarios[contador]).join(" ")+"<button>Eliminar</button></li>"
-        contador++
-        ;
+    const tabla_usuarios = document.getElementById("cuerpo-tabla")
+    let ingreso_lista = ""
+    let contador = 1
+    for (const usuario of usuarios){
+        ingreso_lista += `<tr>
+                            <td>${contador}</td>
+                            <td>${usuario.nombre}</td>
+                            <td>${usuario.apellido}</td>
+                            <td>${usuario.cargo}</td>
+                            <td>${usuario.email}</td>
+                            <td><button>Eliminar</button></td>
+                        </tr>`
+        contador ++;
     }
-    lista_usuarios.innerHTML = test
-        
+    tabla_usuarios.innerHTML = ingreso_lista
+}
+
+function mostrarTabla(){
+    const tabla = document.querySelector(".contenedor")
+    tabla.style.display = "block"
 }
 
 btn_registro.addEventListener("click", e =>{
@@ -28,5 +38,7 @@ btn_registro.addEventListener("click", e =>{
 
     usuarios.push({nombre, apellido, cargo, email})
     usuarioALista(usuarios)
+    mostrarTabla()
 })
+
 
