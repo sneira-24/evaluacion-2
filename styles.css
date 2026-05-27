@@ -70,8 +70,15 @@ button:hover {
     padding: 1rem;
     min-height: 400px;
     background-color: skyblue;
+    display: grid;
+    align-items: start;
 }
 
 #tabla-empleados {
-    min-width: 90%;
+    width: 100%;
+    align-items: center;
+}
+
+#tabla-empleados th,td{
+    overflow: auto;
 }

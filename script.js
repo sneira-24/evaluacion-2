@@ -11,7 +11,7 @@ function usuarioALista(usuarios){ //Función que convertirá el objeto de usuari
     for (const usuario of usuarios){
         if (usuario !== "") { //La razón del if se explica en la funcionalidad de eliminar usuario
             ingreso_lista += `<tr>
-                                <td>${id}</td>
+                                <th>${id}</th>
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
                                 <td>${usuario.cargo}</td>
@@ -49,11 +49,20 @@ btn_registro.addEventListener("click", e =>{ //Se reciben los datos de los input
 
 //Funcionalidad eliminar usuario
 
-function eliminarUsuario(id) {
+function eliminarUsuario(id) {  
     usuarios[id-1] = "" //Se reemplaza el usuario eliminado por un espacio vacio en el arreglo de objetos, de esa manera los IDs no se modifican ya que.
     usuarioALista(usuarios) //el objeto previo aun "existe", solo que sin datos(no es representado en la tabla gracias al if en la funcion usuarioALista).
 }
 
+//Funcionalidad busqueda
 
+const filtroInput = document.getElementById('filtro-input')
+const tabla = document.getElementById('tabla-empleados')
+const tr = tabla.getElementsByTagName('tr')
 
-
+filtroInput.addEventListener('input', ()=> {
+    const filtro = filtroInput.value.toLowerCase()
+    const usuarios_filtrados = usuarios.filter(usuario => usuario.nombre.toLowerCase().includes(filtro) || usuario.cargo.toLowerCase().includes(filtro))
+    usuarioALista(usuarios_filtrados)
+    mostrarTabla()
+})
