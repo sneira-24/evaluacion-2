@@ -12,15 +12,16 @@ body {
 }
 
 header {
-    text-align: center;
+    text-align: left;
     padding: 1rem;
     font-size: 1.2rem ;
+    background-color: skyblue;
 }
 
 main {
     width: 95%;
     max-width: 1200px;
-    margin: 1rem auto;
+    margin: 1.5rem auto;
     background-color: white;
 }
 
@@ -36,7 +37,10 @@ form {
 input {
     width: 100%;
     padding: 0.8rem;
-    margin: 0.5rem 0 1rem;
+    margin-top: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -69,7 +73,6 @@ button:hover {
     border-radius: 12px;
     padding: 1rem;
     min-height: 400px;
-    background-color: skyblue;
     display: grid;
     align-items: start;
 }
@@ -79,6 +82,28 @@ button:hover {
     align-items: center;
 }
 
-#tabla-empleados th,td{
-    overflow: auto;
+#tabla-empleados th,td {
+    overflow: hidden;
+}
+
+#tabla-empleados th {
+    padding-bottom: 0.5rem;
+}
+
+.texto-error {  
+  width: fit-content;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+
+  margin-bottom: 0.3rem;
+  border-radius: 8px;
+  border: 1px solid #ff9999;
+  color: #cc0000;
+  
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: none;
 }
