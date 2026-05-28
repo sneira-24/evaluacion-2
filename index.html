@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registro Empleados</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <p>Empresa lol</p>
+        <p>Empresa</p>
     </header>
 
     <main>
@@ -16,7 +16,7 @@
         <form action ="">
             <label for="nombre">Nombre</label><br>
             <input type="text" id="nombre" placeholder="Ingrese su nombre..." required><br>
-            <div id="error_nombre" class="texto-error" style="color: red;"></div><br>
+            <div id="error_nombre" class="texto-error" style="color: red;"></div><br> <!--estos div son los errores, y están ocultos a menos que haya un error-->
 
             <label for="apellido">Apellido</label><br>
             <input type="text" id="apellido" placeholder="Ingrese su apellido..." required><br>
@@ -34,27 +34,28 @@
         </form>
         <div class="contenedor">
             <h2>Lista empleados</h2>
-            <input type="text" id="filtro-input" placeholder="Search for names..">
+            <input type="text" id="filtro-input" placeholder="Busca por nombre o cargo">
             <div id="contenedor-tabla-empleados">
-                    <table id="tabla-empleados">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Cargo</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cuerpo-tabla">
-                        </tbody>
-                    </table>
+                <table id="tabla-empleados"> <!--solo hacemos la estructura de la tabla y las cabezas de columna, los datos serán agregados por JS-->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cargo</th>
+                            <th>Email</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla">
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
 
-    <footer>
-
+    <footer id="footer">
+        <p>Sebastián Neira</p>
     </footer>
     <script src="script.js"></script>
 </body>

@@ -10,8 +10,8 @@ function usuarioATabla(usuarios){ //Función que convertirá el objeto de usuari
     let id = 1
     for (const usuario of usuarios){
         if (usuario !== "") { //La razón del if se explica en la funcionalidad de eliminar usuario
-            ingreso_tabla += `<tr>
-                                <th>${id}</th>
+            ingreso_tabla += `<tr> 
+                                <td>${id}</td>
                                 <td>${usuario.nombre}</td>
                                 <td>${usuario.apellido}</td>
                                 <td>${usuario.cargo}</td>
@@ -31,14 +31,14 @@ function mostrarTabla(){ //Al crearse la pagina, la tabla se encuentra con displ
 }
 
 //Funciones de validacion
-const reglas_validacion = {
-    nombre:   { required: true, minLength: 2, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Nombre" },
-    apellido: { required: true, minLength: 2, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Apellido" },
-    cargo:    { required: true, minLength: 2, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Cargo" },
-    email:    { required: true, pattern: /^[^\s@]+@empresa\.cl$/, label: "Email" }
+const reglas_validacion = { //Creamos un objeto con las reglas para cada campo
+    nombre:   { required: true, minLength: 2, maxLength: 30, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Nombre" },
+    apellido: { required: true, minLength: 2, maxLength: 30, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Apellido" },
+    cargo:    { required: true, minLength: 2, maxLength: 30, pattern: /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, label: "Cargo" },
+    email:    { required: true, maxLength: 30, pattern: /^[^\s@]+@empresa\.cl$/, label: "Email" }
 }
     
-function erroresEnCampos(campo, valor) {
+function erroresEnCampos(campo, valor) { //Creamos una funcion que retorna un mensaje de error adaptado al campo que se evalúa y el tipo de error
     const reglas = reglas_validacion[campo]
     if (!reglas) return null
 
@@ -48,47 +48,58 @@ function erroresEnCampos(campo, valor) {
     if (reglas.minLength && valor.length < reglas.minLength) 
         return `${reglas.label} debe tener al menos ${reglas.minLength} caracteres.`
 
+    if (reglas.maxLength && valor.length > reglas.maxLength)
+        return `${reglas.label} debe tener como maximos ${reglas.maxLength} caracteres.`
+
     if (reglas.pattern && !reglas.pattern.test(valor)) 
         return `${reglas.label} tiene un formato inválido.`
+
+    if (campo === "email" && usuarios.some(usuario => usuario.email === valor))
+        return `Este correo ya está registrado.`
 
     return null
 }
 
-function validarUsuario(usuario) {
-    const errores = {}
+function validarUsuario(usuario, usuarios) { //Creamos una funcion que valida al objeto de usuario
+    const errores = {} //Se crea un objeto que tendrá todos los errores 
 
-    for (const [campo, valor] of Object.entries(usuario)) {
-        const error = erroresEnCampos(campo, valor)
-        if (error) errores[campo] = error
+    for (const [campo, valor] of Object.entries(usuario)) { //las conststantes campo y valor recibirán los valores de campo y el input que se obtienen de Object.entries(usuario)
+        const error = erroresEnCampos(campo, valor) //evaluamos el campo y el input con la funcion erroresEnCampos y guardamos el mensaje de error en una variable (si es que lo hay)
+        if (error) errores[campo] = error //si hay un error, se agrega al objeto errores, usando el campo como key y el mensaje de error como valor
     }
     return {
-        isValid: Object.keys(errores).length === 0,
-        errores
+        isValid: Object.keys(errores).length === 0, //se retornan dos variables: isValid que retornará True si hay errores o False si no los hay
+        errores //y la segunda variable es el objeto que almacena los errores
     }
 }
 
 //Funcionalidad boton registrar
 btn_registro.addEventListener("click", e =>{ //Se reciben los datos de los input al hacer click en registrar.
     e.preventDefault()
-    const usuario = { 
+    const usuario = { //se guardan los valores en un objeto de usuario
         nombre:   document.getElementById("nombre").value.trim(),
         apellido: document.getElementById("apellido").value.trim(),
         cargo:    document.getElementById("cargo").value.trim(),
-        email:    document.getElementById("email").value.trim()
+        email:    document.getElementById("email").value.toLowerCase().trim()
     }
-    const {isValid, errores} = validarUsuario(usuario)
-    if (isValid) {
+    const {isValid, errores} = validarUsuario(usuario) //se validan los campos
+
+    const divs_errores = document.querySelectorAll("[id^='error_']") //se limpian los errores
+    divs_errores.forEach(div => { //para cada div de error
+        div.style.display = "none"
+        div.textContent = ""
+    })
+
+    if (isValid) { //si isValid es true significa que no hay errores, asi que se agrega el usuario a el array usuarios, y se agrega cada usuario en dicho array a la tabla
         usuarios.push(usuario)
         usuarioATabla(usuarios) 
-        mostrarTabla()
-    } else {
-        array_errores = Object.entries(errores)
-        for (const error of array_errores) {
-            console.log(`error_${error[0]}`)
-            let error_span = document.getElementById(`error_${error[0]}`)
-            error_span.style.display = "block"
-            console.log(error[1])
-            error_span.textContent = error[1];
+        mostrarTabla() //renderizamos la tabla
+    } else { //si isValid es False
+        array_errores = Object.entries(errores) //array_errores será un array que tendrá la siguiente estructura [["Campo", "Mensaje error"]]
+        for (const error of array_errores) { //por cada array de error
+            let error_div = document.getElementById(`error_${error[0]}`) //se selecciona la ID del error del campo correspondiente
+            error_div.style.display = "block"   //se hace visible al error
+            error_div.textContent = error[1]; //se le agrega el mensaje del error
         } 
     }
 })
